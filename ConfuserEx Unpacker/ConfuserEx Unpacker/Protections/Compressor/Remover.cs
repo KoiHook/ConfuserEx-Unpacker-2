@@ -42,9 +42,14 @@ namespace ConfuserEx_Unpacker.Protections.Compressor
             };
             emulator.Emulate();
             if (ModuleBytes == null)
+            {
+                Base.CompressorRemoved = false;
                 return;
+            }
+
             Protections.Base.ModuleDef = ModuleDefMD.Load(ModuleBytes);
             Protections.Base.ModuleDef.EntryPoint = Protections.Base.ModuleDef.ResolveToken(ModuleEp) as MethodDef;
+            Base.CompressorRemoved = true;
         }
 
 

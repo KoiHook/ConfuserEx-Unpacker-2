@@ -38,7 +38,13 @@ namespace ConfuserEx_Unpacker
             {
                 base1.Deobfuscate();
             }
-            Base.ModuleDef.EntryPoint = Base.ModuleDef.ResolveToken(Protections.Compressor.Remover.ModuleEp) as MethodDef;
+
+            if (Protections.Compressor.Remover.ModuleEp != 0)
+            {
+                Base.ModuleDef.EntryPoint =
+                    Base.ModuleDef.ResolveToken(Protections.Compressor.Remover.ModuleEp) as MethodDef;
+            }
+
             ModuleWriterOptions ModOpts = new ModuleWriterOptions(Base.ModuleDef);
             ModOpts.MetadataOptions.Flags = MetadataFlags.PreserveAll;
             ModOpts.Logger = DummyLogger.NoThrowInstance;

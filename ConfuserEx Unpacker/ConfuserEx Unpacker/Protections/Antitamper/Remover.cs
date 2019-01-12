@@ -26,7 +26,7 @@ namespace ConfuserEx_Unpacker.Protections.Antitamper
 
         public override void Deobfuscate()
         {
-            if (IsTampered(ModuleDef) == true)
+            if (IsTampered(ModuleDef) == true&&Base.CompressorRemoved != false)
             {
                 Console.WriteLine("[!] Anti Tamper Detected");
 

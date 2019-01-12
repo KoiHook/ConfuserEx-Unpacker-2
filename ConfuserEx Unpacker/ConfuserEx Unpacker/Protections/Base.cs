@@ -11,7 +11,7 @@ namespace ConfuserEx_Unpacker.Protections
     {
         public abstract void Deobfuscate();
         public static ModuleDefMD ModuleDef;
+        public static bool CompressorRemoved = true;
 
-        
     }
 }
