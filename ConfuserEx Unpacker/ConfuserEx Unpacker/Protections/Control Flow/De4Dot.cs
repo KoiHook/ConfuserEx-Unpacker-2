@@ -199,6 +199,7 @@ namespace ConfuserEx_Unpacker.Protections.Control_Flow
                         //they are in this blocks sources so we go through each source there should be 2
 
                         var sources = new List<Block>(blo.Sources);
+                        if (sources.Count == 1) break;
                         foreach (var source in sources)
                         {
                             //now this will give us the final key we need to get the next arg value and next case

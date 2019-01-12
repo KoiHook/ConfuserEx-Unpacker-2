@@ -163,6 +163,9 @@ namespace CawkEmulatorV4
                         for (var x = 0; x < pushes; x++) ValueStack.CallStack.Push(0);
                     }
                 }
+
+                if (instruction.OpCode == OpCodes.Ret)
+                    return ValueStack;
                 if (instruction.OpCode == OpCodes.Leave_S || instruction.OpCode == OpCodes.Leave)
                 {
                     currentStackVal = 0;

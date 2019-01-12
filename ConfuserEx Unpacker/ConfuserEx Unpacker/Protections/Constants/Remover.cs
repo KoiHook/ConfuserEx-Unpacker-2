@@ -47,7 +47,7 @@ namespace ConfuserEx_Unpacker.Protections.Constants
                 if (!method.IsConstructor) continue;
                 if (!method.FullName.ToLower().Contains("module")) continue;
                 for (var i = 0; i < method.Body.Instructions.Count; i++)
-                    if (method.Body.Instructions[i].OpCode == OpCodes.Call)
+                    if (method.Body.Instructions[i].OpCode == OpCodes.Call&&method.Body.Instructions[i].Operand is MethodDef)
                     {
                         var initMethod = (MethodDef)method.Body.Instructions[i].Operand;
                         if (!initMethod.HasBody) continue;
@@ -149,16 +149,22 @@ namespace ConfuserEx_Unpacker.Protections.Constants
                                 {
                                     var paramsCount = decryptionMethod.Parameters.Count;
                                     var paramss = new object[paramsCount];
+
                                     for (int y = 0; y < paramsCount; y++)
                                     {
-                                        paramss[y] = methods.Body.Instructions[i - y - 1].Operand;
-                                        methods.Body.Instructions[i - y - 1].OpCode = OpCodes.Nop;
+                                        if (methods.Body.Instructions[i - y - 1].IsLdcI4())
+                                        {
+                                            paramss[y] = methods.Body.Instructions[i - y - 1].Operand;
+                                            methods.Body.Instructions[i - y - 1].OpCode = OpCodes.Nop;
+                                        }
                                     }
-
                                     var result = DecryptConstant(decryptionMethod, paramss, bytes);
-                                    methods.Body.Instructions[i].OpCode = OpCodes.Ldstr;
-                                    methods.Body.Instructions[i].Operand = result.ToString();
-                                    Console.WriteLine("Decrypted string {0}", result);
+                                    if (result != null)
+                                    {
+                                        methods.Body.Instructions[i].OpCode = OpCodes.Ldstr;
+                                        methods.Body.Instructions[i].Operand = result.ToString();
+                                        Console.WriteLine("Decrypted string {0}", result);
+                                    }
                                 }
                             }
                         }

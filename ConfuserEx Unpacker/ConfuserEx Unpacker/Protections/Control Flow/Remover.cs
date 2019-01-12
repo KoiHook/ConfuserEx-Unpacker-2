@@ -21,7 +21,7 @@ namespace ConfuserEx_Unpacker.Protections.Control_Flow
         public static void DeobfuscateCflow(MethodDef meth)
         {
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 1; i++)
             {
 
                 CfDeob = new BlocksCflowDeobfuscator();
