@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EasyPredicateKiller;
 
 namespace ConfuserEx_Unpacker
 {
@@ -32,6 +33,7 @@ namespace ConfuserEx_Unpacker
             module = ModuleDefMD.Load(filename);
             LoadAsmRef();
             Base.ModuleDef = module;
+            MethodDefExt2.OriginalMD = Base.ModuleDef;
             foreach(Base base1 in bases)
             {
                 base1.Deobfuscate();

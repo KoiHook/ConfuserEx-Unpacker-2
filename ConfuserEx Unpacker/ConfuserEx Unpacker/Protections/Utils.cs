@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using ConfuserDeobfuscator.Engine.Routines.Ex.x86;
 
 namespace ConfuserEx_Unpacker.Protections
 {
@@ -69,7 +70,7 @@ namespace ConfuserEx_Unpacker.Protections
                 emulation.ValueStack.CallStack.Push(stack1);
                 args.bypassCall = true;
             }
-         /*   else if (args.Instruction.Operand is MethodSpec &&
+            else if (args.Instruction.Operand is MethodSpec &&
                      IsUintDecyption(((MethodSpec)args.Instruction.Operand).ResolveMethodDef()))
             {
                 var method = ((MethodSpec)args.Instruction.Operand).ResolveMethodDef();
@@ -81,7 +82,7 @@ namespace ConfuserEx_Unpacker.Protections
                 emulation.ValueStack.CallStack.Push(Constants.Remover.DecryptConstant(method, param, initBytes));
                 args.bypassCall = true;
             }
-            */
+            
             else if (args.Instruction.Operand.ToString()
                 .Contains("System.Reflection.Assembly System.Reflection.Assembly::GetExecutingAssembly()"))
             {
@@ -220,6 +221,15 @@ namespace ConfuserEx_Unpacker.Protections
                 
                 var stack1 = emulation.ValueStack.CallStack.Pop();
                 emulation.ValueStack.CallStack.Push(stack1.Target);
+                args.bypassCall = true;
+            }
+            else if (args.Instruction.Operand is MethodDef&&((MethodDef)args.Instruction.Operand).IsNative)
+            {
+
+                var stack1 = emulation.ValueStack.CallStack.Pop();
+                X86Method x86 = new X86Method(args.Instruction.Operand as MethodDef);
+                var abc = x86.Execute(stack1);
+                emulation.ValueStack.CallStack.Push(abc);
                 args.bypassCall = true;
             }
             //
