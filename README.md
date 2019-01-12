@@ -12,3 +12,8 @@ this will heavily be based off my instruction emulator which makes it much more 
 
 i have not used sub modules due to making changes within de4dot.blocks in Int32/64Value i have modified the Shr_Un methods and such to fix a bug (well not really a bug but it prevents some operations from giving correct result) 
 
+if you have an issue with this unpacker please make an issue report but if you simply go 
+
+'does not work on this file please fix' i simply will just close your issue 
+
+please make a detailed report and explain where it crashes 
