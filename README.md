@@ -2,6 +2,8 @@
 
 # BETA
 
+To the people who i have added to this when code has been published feel free to test and report bugs
+
 A new and updated version of my last unpacker for confuserex which people actually seem to use so i thought i would update it and actually make it better as that version is very poor
 
 this is currently in beta and in its first version will only support confuserex with no modifications or additional options from confuserex itself. this will change as i add more features
