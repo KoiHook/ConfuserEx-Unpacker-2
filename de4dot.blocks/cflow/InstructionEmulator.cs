@@ -188,7 +188,7 @@ namespace de4dot.blocks.cflow {
 			return null;
 		}
 
-		public void SetArg(Parameter arg, Value value) {
+        public void SetArg(Parameter arg, Value value) {
 			if (arg != null)
 				SetArg(arg.Index, value);
 		}
@@ -198,7 +198,7 @@ namespace de4dot.blocks.cflow {
 				SetArg(arg, GetUnknownArg(arg.Index));
 		}
 
-		void SetArg(int index, Value value) {
+		public void SetArg(int index, Value value) {
 			if (0 <= index && index < args.Count)
 				args[index] = TruncateValue(value, GetArgType(index));
 		}

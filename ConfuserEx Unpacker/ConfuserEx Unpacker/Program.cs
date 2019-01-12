@@ -21,7 +21,11 @@ namespace ConfuserEx_Unpacker
 
                new Protections.Antitamper.Remover(),
                new Protections.Control_Flow.Remover(),
+               new Protections.RefProxy.Remover(),
+               new Protections.Control_Flow.Remover(),
                new Protections.Constants.Remover(),
+               new Protections.Control_Flow.Remover(),
+               new Protections.RefProxy.Remover(),
         };
         static void Main(string[] args)
         {
