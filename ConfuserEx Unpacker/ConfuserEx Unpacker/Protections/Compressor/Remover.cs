@@ -20,9 +20,28 @@ namespace ConfuserEx_Unpacker.Protections.Compressor
 
         public override void Deobfuscate()
         {
-            StepOne(ModuleDef);
+            if (IsPacked(ModuleDef))
+            {
+                StepOne(ModuleDef);
+            }
         }
+        public static bool IsPacked(ModuleDefMD module)
+        {
 
+            // Thanks to 0xd4d https://github.com/0xd4d/dnlib/issues/72
+            for (uint rid = 1; rid <= module.Metadata.TablesStream.FileTable.Rows; rid++)
+            {
+                dnlib.DotNet.MD.RawFileRow row = new dnlib.DotNet.MD.RawFileRow();
+                module.TablesStream.TryReadFileRow(rid,out row);
+                string name = module.StringsStream.ReadNoNull(row.Name);
+                if (name != "koi") continue;
+
+
+                return true;
+            }
+
+            return false;
+        }
         private void StepOne(ModuleDefMD module)
         {
             var ep = module.EntryPoint;

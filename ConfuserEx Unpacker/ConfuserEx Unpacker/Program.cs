@@ -38,7 +38,7 @@ namespace ConfuserEx_Unpacker
             LoadAsmRef();
             Base.ModuleDef = module;
             MethodDefExt2.OriginalMD = Base.ModuleDef;
-            foreach(Base base1 in bases)
+            foreach (Base base1 in bases)
             {
                 base1.Deobfuscate();
             }
