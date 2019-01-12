@@ -149,14 +149,30 @@ namespace ConfuserEx_Unpacker.Protections.Constants
                                 {
                                     var paramsCount = decryptionMethod.Parameters.Count;
                                     var paramss = new object[paramsCount];
-
-                                    for (int y = 0; y < paramsCount; y++)
+                                    if (paramsCount == 1)
                                     {
-                                        if (methods.Body.Instructions[i - y - 1].IsLdcI4())
+                                        if (methods.Body.Instructions[i - 1].IsLdcI4())
                                         {
-                                            paramss[y] = methods.Body.Instructions[i - y - 1].Operand;
-                                            methods.Body.Instructions[i - y - 1].OpCode = OpCodes.Nop;
+                                            paramss[0] = methods.Body.Instructions[i - 1].Operand;
+                                            methods.Body.Instructions[i - 1].OpCode = OpCodes.Nop;
                                         }
+                                    }
+
+                                    else
+                                    {
+                                        for (int y = 0; y < paramsCount; y++)
+                                        {
+                                            if (methods.Body.Instructions[i - y - 1].IsLdcI4())
+                                            {
+                                                paramss[y] = methods.Body.Instructions[i - y - 1].Operand;
+                                                methods.Body.Instructions[i - y - 1].OpCode = OpCodes.Nop;
+                                            }
+                                        }
+                                    }
+
+                                    if (paramss.Any(g => g == null))
+                                    {
+                                        continue;
                                     }
                                     var result = DecryptConstant(decryptionMethod, paramss, bytes);
                                     if (result != null)
