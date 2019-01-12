@@ -51,6 +51,9 @@
     <Compile Include="Protections\Antitamper\Remover.cs" />
     <Compile Include="Protections\Base.cs" />
     <Compile Include="Protections\Compressor\Remover.cs" />
+    <Compile Include="Protections\Constants\Remover.cs" />
+    <Compile Include="Protections\Control Flow\De4Dot.cs" />
+    <Compile Include="Protections\Control Flow\Remover.cs" />
     <Compile Include="Protections\LZMA.cs" />
     <Compile Include="Protections\Utils.cs" />
   </ItemGroup>

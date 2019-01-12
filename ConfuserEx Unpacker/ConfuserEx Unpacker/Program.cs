@@ -15,8 +15,12 @@ namespace ConfuserEx_Unpacker
         private static Base[] bases = new Base[]
         {
             new Protections.Antitamper.Remover(),
+                 new Protections.Control_Flow.Remover(),
             new Protections.Compressor.Remover(),
+
                new Protections.Antitamper.Remover(),
+               new Protections.Control_Flow.Remover(),
+               new Protections.Constants.Remover(),
         };
         static void Main(string[] args)
         {
@@ -32,12 +36,13 @@ namespace ConfuserEx_Unpacker
             {
                 base1.Deobfuscate();
             }
+            Base.ModuleDef.EntryPoint = Base.ModuleDef.ResolveToken(Protections.Compressor.Remover.ModuleEp) as MethodDef;
             ModuleWriterOptions ModOpts = new ModuleWriterOptions(Base.ModuleDef);
             ModOpts.MetadataOptions.Flags = MetadataFlags.PreserveAll;
             ModOpts.Logger = DummyLogger.NoThrowInstance;
             Console.WriteLine("Writing the file...");
             Base.ModuleDef.Write(NewPath(filename), ModOpts);
-
+            Console.ReadLine();
         }
         public static string NewPath(string path)
         {
