@@ -1,8 +1,7 @@
 # ConfuserEx Unpacker 2
 
-# BETA
+# STILL UNDER BETA
 
-To the people who i have added to this when code has been published feel free to test and report bugs
 
 A new and updated version of my last unpacker for confuserex which people actually seem to use so i thought i would update it and actually make it better as that version is very poor
 
@@ -17,3 +16,8 @@ if you have an issue with this unpacker please make an issue report but if you s
 'does not work on this file please fix' i simply will just close your issue 
 
 please make a detailed report and explain where it crashes 
+
+Credits
+TheProxy for his Reference Proxy Remover
+Shadow Anti Tamper remover
+0xd4d dnlib/de4dot
